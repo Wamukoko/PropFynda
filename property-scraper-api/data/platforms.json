@@ -1,0 +1,644 @@
+[
+  {
+    "id": "buyrentkenya",
+    "name": "BuyRentKenya",
+    "base_url": "https://www.buyrentkenya.com",
+    "listing_paths": [
+      "/property-for-sale",
+      "/property-for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "buyrentkenya",
+    "scrape_priority": 1,
+    "notes": "Reference implementation. Phone numbers are gated behind a JS reveal - contact_gate uses Playwright to click 'View Number' and extract the revealed phone.",
+    "contact_gate": {
+      "type": "click_to_reveal",
+      "selector": "a[href*='tel:'], .view-number-btn, button:has-text('View Number')",
+      "wait_selector": ".phone-number, a[href^='tel:']",
+      "use_playwright": true,
+      "wait_timeout_ms": 5000
+    }
+  },
+  {
+    "id": "propertyke",
+    "name": "Property KE",
+    "base_url": "https://propertyke.com",
+    "listing_paths": [
+      "/for-rent",
+      "/for-sale"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 3,
+    "notes": "",
+    "selectors": {
+      "listing_selector": "article.property-card"
+    }
+  },
+  {
+    "id": "jiji",
+    "name": "Jiji Kenya",
+    "base_url": "https://jiji.co.ke",
+    "listing_paths": [
+      "/real-estate"
+    ],
+    "type": "classifieds",
+    "active": true,
+    "adapter": "jiji",
+    "scrape_priority": 2,
+    "notes": "JS-rendered platform. Uses Playwright for listing discovery and click-to-reveal phone numbers.",
+    "contact_gate": {
+      "type": "click_to_reveal",
+      "selector": ".show-number, .phone-btn",
+      "wait_selector": ".phone-number",
+      "use_playwright": true,
+      "wait_timeout_ms": 5000
+    }
+  },
+  {
+    "id": "maploti",
+    "name": "Maploti",
+    "base_url": "https://maploti.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 4,
+    "notes": "Best-effort generic config. Tries JSON-LD first, then CSS selectors.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "property24",
+    "name": "Property24 Kenya",
+    "base_url": "https://www.property24.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/to-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 5,
+    "notes": "Best-effort generic config. Property24 uses structured data on many pages.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|to-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "pigiame",
+    "name": "PigiaMe",
+    "base_url": "https://www.pigiame.co.ke",
+    "listing_paths": [
+      "/real-estate",
+      "/property-for-sale",
+      "/property-for-rent"
+    ],
+    "type": "classifieds",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 6,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(listing|property|real-estate)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "kenyapropertycentre",
+    "name": "Kenya Property Centre",
+    "base_url": "https://kenyapropertycentre.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 7,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "propertypro",
+    "name": "PropertyPro Kenya",
+    "base_url": "https://www.propertypro.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 8,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "vorsagroup",
+    "name": "VorsaGroup Real Estate",
+    "base_url": "https://vorsagroup.co.ke",
+    "listing_paths": [
+      "/properties",
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 9,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|properties)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "bomalist",
+    "name": "BomaList",
+    "base_url": "https://bomalist.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 10,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "loiket",
+    "name": "Loiket",
+    "base_url": "https://loiket.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 11,
+    "notes": "Best-effort generic config. AI-powered property search platform.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "irentlist",
+    "name": "iRentlist",
+    "base_url": "https://irentlist.com",
+    "listing_paths": [
+      "/for-rent",
+      "/for-sale"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 12,
+    "notes": "Best-effort generic config. Focused on rentals and sales.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-rent|for-sale)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "realestatekenya",
+    "name": "RealEstateKenya.net",
+    "base_url": "https://realestatekenya.net",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 13,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "propcart",
+    "name": "Propcart",
+    "base_url": "https://propcart.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 14,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "haofinder",
+    "name": "Hao Finder",
+    "base_url": "https://www.haofinder.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 15,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "cheki",
+    "name": "Cheki Property",
+    "base_url": "https://www.cheki.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "classifieds",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 16,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent|car)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "adsite",
+    "name": "AdSites Kenya",
+    "base_url": "https://www.adsite.co.ke",
+    "listing_paths": [
+      "/real-estate",
+      "/property-for-sale",
+      "/property-for-rent"
+    ],
+    "type": "classifieds",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 17,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(listing|property|real-estate)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "propertylink",
+    "name": "PropertyLink Kenya",
+    "base_url": "https://propertylink.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 18,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "olx",
+    "name": "OLX Kenya",
+    "base_url": "https://www.olx.co.ke",
+    "listing_paths": [
+      "/real-estate"
+    ],
+    "type": "classifieds",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 19,
+    "notes": "Best-effort generic config. OLX is JS-heavy; scraping may require Playwright.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(item|ad|listing)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"],
+    "contact_gate": {
+      "type": "click_to_reveal",
+      "selector": "[class*='phone'], button:has-text('Show')",
+      "wait_selector": "[class*='phone-number'], a[href^='tel:']",
+      "use_playwright": true,
+      "wait_timeout_ms": 5000
+    }
+  },
+  {
+    "id": "nyumbalink",
+    "name": "Nyumba Link",
+    "base_url": "https://nyumbalink.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 20,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "househuntkenya",
+    "name": "HouseHunt Kenya",
+    "base_url": "https://www.househuntkenya.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 21,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "property254",
+    "name": "Property254",
+    "base_url": "https://property254.co.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 22,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "gazebohomes",
+    "name": "Gazebo Homes",
+    "base_url": "https://www.gazebohomes.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 23,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "ownitkenya",
+    "name": "Own It Kenya",
+    "base_url": "https://ownitkenya.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 24,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "propertyfinder",
+    "name": "Property Finder Kenya",
+    "base_url": "https://propertyfinder.ke",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 25,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "commercialpropertykenya",
+    "name": "Commercial Property Kenya",
+    "base_url": "https://commercialpropertykenya.com",
+    "listing_paths": [
+      "/for-sale",
+      "/for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 26,
+    "notes": "Best-effort generic config.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "pamgolding",
+    "name": "PamGolding",
+    "base_url": "https://www.pamgolding.co.ke",
+    "listing_paths": [
+      "/property-search/for-sale",
+      "/property-search/to-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 27,
+    "notes": "Best-effort generic config. Major agency portal; uses structured data on many pages.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|properties)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  },
+  {
+    "id": "hassconsult",
+    "name": "HassConsult",
+    "base_url": "https://www.hassconsult.co.ke",
+    "listing_paths": [
+      "/property-for-sale",
+      "/property-for-rent"
+    ],
+    "type": "portal",
+    "active": true,
+    "adapter": "generic",
+    "scrape_priority": 28,
+    "notes": "Best-effort generic config. Major agency portal.",
+    "selectors": {
+      "listing_link": "a",
+      "listing_href_pattern": "/(property|listing|properties|for-sale|for-rent)",
+      "title": "h1",
+      "price": "[class*='price'], .price",
+      "location": "[class*='location'], .location",
+      "description": "[class*='description'], .description"
+    },
+    "phone_patterns": ["(?:\\+?254|0)[17]\\d{8}"]
+  }
+]

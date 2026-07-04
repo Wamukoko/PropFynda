@@ -1,0 +1,180 @@
+{
+  "schema_name": "UnifiedKenyaPropertyListing",
+  "version": "1.0",
+  "derived_from": [
+    "https://www.property24.co.ke/",
+    "https://kenyapropertycentre.com/",
+    "https://buyrentkenya.com/",
+    "https://www.pigiame.co.ke/",
+    "https://jiji.co.ke/"
+  ],
+  "fields": {
+    "listing_id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique platform reference / property ref number"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Listing headline, e.g. 'Modern 3 Bedroom Apartment'"
+    },
+    "listing_type": {
+      "type": "enum",
+      "values": ["sale", "rent", "shortlet", "lease", "joint_venture"],
+      "required": true,
+      "description": "Transaction type (Buy/Rent seen on all sites; Shortlet & JV seen on Kenya Property Centre)"
+    },
+    "property_type": {
+      "type": "enum",
+      "values": [
+        "house", "apartment_flat", "townhouse", "bungalow", "duplex",
+        "maisonette", "villa", "bedsitter", "studio", "block_of_flats",
+        "land_residential", "land_commercial", "land_industrial",
+        "land_agricultural_farm", "commercial_office", "commercial_shop",
+        "commercial_warehouse", "commercial_retail_mall", "hotel_guesthouse",
+        "school", "church", "industrial", "other"
+      ],
+      "required": true,
+      "description": "Unified property category, consolidating Property24's basic types and KPC's granular subtypes"
+    },
+    "location": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "country": { "type": "string", "default": "Kenya" },
+        "county": { "type": "string", "example": "Nairobi, Kiambu, Mombasa" },
+        "area_suburb": { "type": "string", "example": "Westlands, Kilimani, Ruiru" },
+        "street_address": { "type": "string", "required": false },
+        "latitude": { "type": "number", "required": false },
+        "longitude": { "type": "number", "required": false }
+      },
+      "description": "Nested to match how sites drill down: Country > County/Province > Town/Suburb > Estate/Street"
+    },
+    "price": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "amount": { "type": "number" },
+        "currency": { "type": "enum", "values": ["KES", "USD", "GBP", "EUR", "CAD"], "default": "KES" },
+        "price_period": {
+          "type": "enum",
+          "values": ["one_time", "per_month", "per_year", "per_night"],
+          "description": "one_time for sale; per_month typical for rent; per_night for shortlets"
+        },
+        "vat_included": { "type": "boolean", "required": false }
+      }
+    },
+    "size": {
+      "type": "object",
+      "required": false,
+      "fields": {
+        "floor_size": { "type": "number", "unit": "sqm" },
+        "land_size": { "type": "number", "unit": "sqm_or_acres" },
+        "land_size_unit": { "type": "enum", "values": ["sqm", "acres", "hectares"] }
+      }
+    },
+    "bedrooms": {
+      "type": "integer",
+      "required": false,
+      "description": "Common across all portals; often filterable as ranges (e.g. 1+, 2+, up to 6+)"
+    },
+    "bathrooms": {
+      "type": "integer",
+      "required": false
+    },
+    "parking_spaces": {
+      "type": "integer",
+      "required": false,
+      "description": "Seen on Property24 as 'Parking/Garage'"
+    },
+    "furnishing_status": {
+      "type": "enum",
+      "values": ["furnished", "unfurnished", "semi_furnished"],
+      "required": false,
+      "description": "Filter present on Kenya Property Centre"
+    },
+    "occupancy_extras": {
+      "type": "object",
+      "required": false,
+      "fields": {
+        "serviced": { "type": "boolean" },
+        "shared": { "type": "boolean" },
+        "pet_friendly": { "type": "boolean" },
+        "has_garden": { "type": "boolean" },
+        "has_pool": { "type": "boolean" },
+        "has_flatlet": { "type": "boolean" },
+        "security_estate_or_cluster": { "type": "boolean" },
+        "on_show": { "type": "boolean" },
+        "on_auction": { "type": "boolean" },
+        "is_repossessed": { "type": "boolean" },
+        "is_retirement_property": { "type": "boolean" }
+      },
+      "description": "Amenity/status flags, consolidated from Property24 feature checkboxes and KPC toggles"
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "description": "Free-text listing description"
+    },
+    "images": {
+      "type": "array",
+      "items": "url",
+      "required": false
+    },
+    "date_listed": {
+      "type": "date",
+      "required": false,
+      "description": "Maps to KPC's 'Added to site' filter (last 24h/3d/7d/14d/30d)"
+    },
+    "agent": {
+      "type": "object",
+      "required": false,
+      "fields": {
+        "agent_id": { "type": "string" },
+        "name": { "type": "string" },
+        "agency_name": { "type": "string" },
+        "agent_type": {
+          "type": "enum",
+          "values": ["individual_agent", "agency", "developer", "private_owner"]
+        },
+        "phone_number": { "type": "string" },
+        "whatsapp_number": { "type": "string", "required": false },
+        "email": { "type": "string" },
+        "verified": { "type": "boolean", "required": false, "description": "e.g. KPC 'Verified agents'" }
+      }
+    },
+    "contact_actions": {
+      "type": "object",
+      "required": false,
+      "fields": {
+        "call": { "type": "boolean" },
+        "sms_or_message": { "type": "boolean" },
+        "in_platform_enquiry_form": { "type": "boolean" }
+      }
+    },
+    "source_platform": {
+      "type": "string",
+      "required": true,
+      "description": "Name of the origin site, e.g. 'Property24 Kenya', 'BuyRentKenya', 'Kenya Property Centre'"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "description": "Direct link to the original listing"
+    }
+  },
+  "notes": {
+    "coverage_by_site": {
+      "Property24 Kenya": "Type, price range, size (m2), bedrooms, bathrooms, parking, feature flags (pet friendly, garden, pool, flatlet), status flags (retirement, repossessed, on show, on auction, security estate)",
+      "Kenya Property Centre": "Very granular property subtypes, listing type incl. Shortlet & JV, furnishing/serviced/shared toggles, date-added filter, price in multiple currencies, verified agents",
+      "BuyRentKenya / PigiaMe / Jiji": "Simpler classifieds-style schema: title, price, location, bedrooms, agent contact (phone/WhatsApp), description, images; fewer structured amenity flags"
+    },
+    "gaps_to_confirm_via_listing_detail_pages": [
+      "Exact email exposure practices (many sites gate email behind an enquiry form rather than displaying it directly)",
+      "Year built / condition (not consistently present)",
+      "Ownership/title type (freehold vs leasehold) — mentioned only in blog content, not confirmed as a structured field on any portal's search UI"
+    ]
+  }
+}
