@@ -5,7 +5,8 @@ export default defineConfig({
   plugins: [react()],
   base: '/',
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    assetsInlineLimit: 0
   },
   server: {
     historyApiFallback: true,
